@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Search</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.jpg" alt="Doctor Search Logo">
+                <span>Doctor Search</span>
+            </div>
+            <nav>
+                <a href="aboutus.html">About Us</a>
+                <a href="faq.html">FAQs</a>
+                <a href="contact.html">Contact Us</a>
+                
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Your Journey to Wellness Starts Here</h1>
+    </div>
+
+    
+    
+    <div class="search-bar">
+        <form id="searchForm">
+            <input type="text" id="location" placeholder="Location">
+            <select id="specialty">
+                <option value="">Specialty</option>
+                <option value="General Practitioner">General Practitioner</option>
+                <option value="Dentist">Dentist</option>
+                <option value="Cardiologist">Cardiologist</option>
+            </select>
+            <input type="text" id="doctorName" placeholder="Doctor's Name (optional)">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="info-section">
+        <h2>Popular Specialties</h2>
+        <button onclick="filterBySpecialty('General Practitioner')">General Practitioner</button>
+        <button onclick="filterBySpecialty('Dentist')">Dentist</button>
+        <button onclick="filterBySpecialty('Cardiologist')">Cardiologist</button>
+    </div>
+    <div class="results" id="results"></div>
+    
+
+    <div class="testimonials-container">
+        <h2>User Testimonials</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-box">
+                <p>"This website helped me find a great doctor easily!" - John Doe</p>
+            </div>
+            <div class="testimonial-box">
+                <p>"I love how simple it is to book appointments." - Jane Smith</p>
+            </div>
+            <div class="testimonial-box">
+                <p>"The service is excellent and very user-friendly." - Alice Johnson</p>
+            </div>
+            <div class="testimonial-box">
+                <p>"A lifesaver for finding specialists quickly!" - Michael Brown</p>
+            </div>
+            <div class="testimonial-box">
+                <p>"Highly recommended for anyone needing quick appointments." - Linda Wilson</p>
+            </div>
+            <div class="testimonial-box">
+                <p>"I found the best doctor in my area thanks to this site." - David Lee</p>
+            </div>
+            <div class="testimonial-box">
+                <p>"The booking process was seamless and efficient." - Sarah Kim</p>
+            </div>
+            <div class="testimonial-box">
+                <p>"Fantastic resource for anyone with a busy schedule." - Chris Evans</p>
+            </div>
+        </div>
+    </div>
+    
+
+    <footer>
+        <div>
+            <a href="aboutus.html">About Us</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div>Follow us on:
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+        <div>Contact us at: support@doctorsearch.com</div>
+    </footer>
+
+    <script>
+        const doctors = [
+            { name: "Dr. Arjun Sharma", location: "Mumbai", specialty: "General Practitioner" },
+            { name: "Dr. Suman Rao", location: "Delhi", specialty: "Dentist" },
+            { name: "Dr. Priya Nair", location: "Bangalore", specialty: "Cardiologist" },
+            { name: "Dr. Rajesh Mehta", location: "Chennai", specialty: "General Practitioner" },
+            { name: "Dr. Meera Iyer", location: "Hyderabad", specialty: "Dentist" },
+            { name: "Dr. Amit Gupta", location: "Pune", specialty: "Cardiologist" },
+            { name: "Dr. Kavita Singh", location: "Kolkata", specialty: "General Practitioner" },
+            { name: "Dr. Vikram Khanna", location: "Ahmedabad", specialty: "Dentist" },
+            { name: "Dr. Nisha Patel", location: "Surat", specialty: "Cardiologist" },
+            { name: "Dr. Ramesh Yadav", location: "Jaipur", specialty: "General Practitioner" },
+            { name: "Dr. Anjali Verma", location: "Lucknow", specialty: "Dentist" },
+            { name: "Dr. Suresh Menon", location: "Nagpur", specialty: "Cardiologist" },
+            { name: "Dr. Lakshmi Rao", location: "Indore", specialty: "General Practitioner" },
+            { name: "Dr. Manish Sinha", location: "Patna", specialty: "Dentist" },
+            { name: "Dr. Pooja Gupta", location: "Bhopal", specialty: "Cardiologist" },
+            { name: "Dr. Kiran Reddy", location: "Thane", specialty: "General Practitioner" },
+            { name: "Dr. Anil Joshi", location: "Vadodara", specialty: "Dentist" },
+            { name: "Dr. Rohit Kapoor", location: "Visakhapatnam", specialty: "Cardiologist" },
+            { name: "Dr. Shweta Sharma", location: "Ludhiana", specialty: "General Practitioner" },
+            { name: "Dr. Mohit Bansal", location: "Agra", specialty: "Dentist" },
+            { name: "Dr. Neha Jain", location: "Nashik", specialty: "Cardiologist" },
+            { name: "Dr. Vikash Gupta", location: "Faridabad", specialty: "General Practitioner" },
+            { name: "Dr. Praveen Kumar", location: "Meerut", specialty: "Dentist" },
+            { name: "Dr. Sneha Das", location: "Rajkot", specialty: "Cardiologist" },
+            { name: "Dr. Rajat Singh", location: "Kalyan", specialty: "General Practitioner" },
+            { name: "Dr. Nandini Mishra", location: "Vasai-Virar", specialty: "Dentist" },
+            { name: "Dr. Suraj Jain", location: "Varanasi", specialty: "Cardiologist" },
+            { name: "Dr. Deepa Chatterjee", location: "Srinagar", specialty: "General Practitioner" },
+            { name: "Dr. Sanjay Chawla", location: "Aurangabad", specialty: "Dentist" },
+            { name: "Dr. Monika Aggarwal", location: "Dhanbad", specialty: "Cardiologist" }
+            // You can add more doctors as needed
+        ];
+    
+      
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const location = document.getElementById('location').value.toLowerCase();
+        const specialty = document.getElementById('specialty').value;
+        const doctorName = document.getElementById('doctorName').value.toLowerCase();
+
+        console.log('Location:', location);
+        console.log('Specialty:', specialty);
+        console.log('Doctor Name:', doctorName);
+
+        const filteredDoctors = doctors.filter(doctor => {
+            return (
+                (location === "" || doctor.location.toLowerCase().includes(location)) &&
+                (specialty === "" || doctor.specialty === specialty) &&
+                (doctorName === "" || doctor.name.toLowerCase().includes(doctorName))
+            );
+        });
+
+        console.log('Filtered Doctors:', filteredDoctors);
+
+        displayResults(filteredDoctors);
+    });
+
+    function filterBySpecialty(specialty) {
+        const filteredDoctors = doctors.filter(doctor => doctor.specialty === specialty);
+        displayResults(filteredDoctors);
+    }
+
+    function displayResults(filteredDoctors) {
+        const resultsContainer = document.getElementById('results');
+        resultsContainer.innerHTML = "";
+
+        if (filteredDoctors.length > 0) {
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+
+            const headerRow = document.createElement('tr');
+            const headers = ['Name', 'Location', 'Specialty'];
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+
+            filteredDoctors.forEach(doctor => {
+                const row = document.createElement('tr');
+                Object.values(doctor).forEach(text => {
+                    const td = document.createElement('td');
+                    td.textContent = text;
+                    row.appendChild(td);
+                });
+                tbody.appendChild(row);
+            });
+
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            resultsContainer.appendChild(table);
+        } else {
+            resultsContainer.textContent = "No results found";
+        }
+    }    </script>
+    
+    
+</body>
+</html>
